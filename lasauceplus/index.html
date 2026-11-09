@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Sauce+ | بيتزا · تاكوس · سوفلي — الجلفة</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="cart.css">
+<link rel="icon" type="image/jpeg" href="images/logo.jpg">
+</head>
+<body>
+
+  <div class="announce">🔥 برومو هبال: 3 بيتزا بولي بـ 60.000 دج فقط · التوصيل متوفر داخل الجلفة</div>
+
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="images/logo.jpg" alt="La Sauce+">
+        <span><span class="plus">+</span>LA SAUCE</span>
+      </a>
+      <div class="navlinks">
+        <a href="#menu">العروض</a>
+        <a href="#why">لماذا نحن</a>
+        <a href="#avis">آراء الزبائن</a>
+        <a href="#locations">الموقع</a>
+      </div>
+      <a href="cart.html" class="cart-btn">
+        🛒 السلة
+        <span class="cart-badge" id="navCartBadge" style="display:none;">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Pizza · Tacos · Plus — طعم لا يقاوم</div>
+      <h1>سخونة.<br><span class="accent">بنينة.</span><br>عندك في دقايق.</h1>
+      <p>بيتزا بولي، تاكوس، سوفلي و تشيز كباب... كل طبق يتحضّر طازج ساعة الطلب. مكونات طازجة، جودة مضمونة، وسومة ما تتلاقاش.</p>
+      <div class="hero-ctas">
+        <a href="#menu" class="btn-primary">شوف العروض</a>
+        <a href="https://maps.app.goo.gl/4TBpTigqoQxNwEWy8?g_st=ac" target="_blank" class="btn-ghost">وين نلقاوكم</a>
+      </div>
+      <div class="hero-tags">
+        <span>✅ مكونات طازجة</span>
+        <span>🚴 توصيل متوفر</span>
+        <span>تقييم ⭐4.8/5</span>
+      </div>
+    </div>
+    <div class="dish-stage">
+      <div class="dish-plate">
+        <img src="images/pizza2.jpg" alt="بيتزا La Sauce+">
+      </div>
+      <div class="price-chip">
+        <span class="chip-label">تبدأ من</span>
+        <span class="chip-price">600 دج</span>
+      </div>
+      <div class="rating-chip">★★★★★ <span>40+ تقييم</span></div>
+    </div>
+  </section>
+
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>★ بيتزا بولي فرماج</span><span>★ تاكوس طازج</span><span>★ سوفلي و غراتا</span><span>★ تشيز كباب</span>
+      <span>★ بيتزا بولي فرماج</span><span>★ تاكوس طازج</span><span>★ سوفلي و غراتا</span><span>★ تشيز كباب</span>
+    </div>
+  </div>
+
+  <section class="section" id="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">عرض خاص · حبس ما تتفوتش</div>
+          <h2>البرومو هبال</h2>
+        </div>
+        <a href="tel:0663011396" class="btn-ghost" style="border-color:var(--cream); color:var(--cream);">📞 0663011396</a>
+      </div>
+      <div class="menu-grid">
+
+        <div class="card">
+          <div class="card-photo"><img src="images/pizza1.jpg" alt="3 بيتزا بولي"></div>
+          <div class="card-body">
+            <h3>3 بيتزا بولي</h3>
+            <p>ثلاث بيتزا دجاج مقرمشة بجبنة ذائبة، مثالية للعائلة كاملة.</p>
+            <div class="card-foot"><span class="price">600 دج</span><a href="javascript:void(0)" class="add-btn" onclick="addToCart('pizza-poulet-3','3 بيتزا بولي',600)">+</a></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-photo"><img src="images/pizza3.jpg" alt="3 بيتزا بولي فرماج"></div>
+          <div class="card-body">
+            <h3>3 بيتزا بولي فرماج</h3>
+            <p>نفس الطعم المميز مع طبقة جبن إضافية سخونة تسيل في كل قضمة.</p>
+            <div class="card-foot"><span class="price">900 دج</span><a href="javascript:void(0)" class="add-btn" onclick="addToCart('pizza-poulet-fromage-3','3 بيتزا بولي فرماج',900)">+</a></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-photo"><img src="images/tacos1.jpg" alt="2 بيتزا + 2 تاكوس"></div>
+          <div class="card-body">
+            <h3>2 بيتزا بولي + 2 تاكوس</h3>
+            <p>كومبو مزدوج بين البيتزا والتاكوس، جربوا طعمين في طلبية وحدة.</p>
+            <div class="card-foot"><span class="price">1000 دج</span><a href="javascript:void(0)" class="add-btn" onclick="addToCart('combo-pizza-tacos','2 بيتزا بولي + 2 تاكوس',1000)">+</a></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-photo"><img src="images/soufli_pizza.jpg" alt="2 بيتزا + 2 سندويتش ماريني"></div>
+          <div class="card-body">
+            <h3>2 بيتزا + 2 سندويتش ماريني وجبن</h3>
+            <p>كومبو كبير يجمع البيتزا والسندويتش الماريني بالجبن الذائب.</p>
+            <div class="card-foot"><span class="price">1000 دج</span><a href="javascript:void(0)" class="add-btn" onclick="addToCart('combo-pizza-sandwich','2 بيتزا + 2 سندويتش ماريني وجبن',1000)">+</a></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-photo"><img src="images/soufli1.jpg" alt="3 تشيز كباب"></div>
+          <div class="card-body">
+            <h3>3 تشيز كباب</h3>
+            <p>كباب مشوي بجبنة ذائبة، مرفوق بخضرة طازجة وصوص خاص بالدار.</p>
+            <div class="card-foot"><span class="price">500 دج</span><a href="javascript:void(0)" class="add-btn" onclick="addToCart('cheese-kebab-3','3 تشيز كباب',500)">+</a></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-photo"><img src="images/tacos2.jpg" alt="سوفلي وغراتا"></div>
+          <div class="card-body">
+            <h3>سوفلي وغراتا</h3>
+            <p>نكهة خيالية ما تنساوش تجربوها، بنّة تخلي كل زيارة تولي عادة.</p>
+            <div class="card-foot"><span class="price">جربها الآن</span><a href="tel:0663011396" class="add-btn">+</a></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mini-promo">
+        <div class="mini-promo-item">
+          <span>3 تاكوس Sample</span>
+          <strong>1.000 دج</strong>
+        </div>
+        <a href="javascript:void(0)" class="add-btn mini-add" onclick="addToCart('tacos-sample-3','3 تاكوس Sample',1000)">+</a>
+        <div class="mini-promo-divider"></div>
+        <div class="mini-promo-item">
+          <span>3 تاكوس 3 أجبان</span>
+          <strong>1.200 دج</strong>
+        </div>
+        <a href="javascript:void(0)" class="add-btn mini-add" onclick="addToCart('tacos-3fromages-3','3 تاكوس 3 أجبان',1200)">+</a>
+        <div class="mini-promo-tag">تخفيض لفترة محدودة ⏱️</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="why">
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-num">🔥</div>
+        <h3>يتحضّر ساعة الطلب</h3>
+        <p>ما كاين والو مسبق التحضير، طلبك يبدا يطهى فور ما تأكدوه.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">🧀</div>
+        <h3>مكونات طازجة يوميا</h3>
+        <p>جبن، خضرة ولحم طازج كل يوم، بلا تجميد وبلا اختصارات.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">💰</div>
+        <h3>أسعار جد معقولة</h3>
+        <p>جودة وكمية بسومة تناسب الجيب، وعروض جديدة كل مرة.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">🛵</div>
+        <h3>التوصيل متوفر</h3>
+        <p>اطلب وارتاح، الطلبية توصلك سخونة فين ما كنت في الجلفة.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section avis" id="avis">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Google Reviews</div>
+          <h2>آراء زبائننا</h2>
+        </div>
+      </div>
+      <div class="avis-grid">
+        <div class="avis-card">
+          <div class="stars">★★★★★</div>
+          <p>"دائما جديد. اسعار جد معقولة، نكهة أحلى ومعاملة ملكة."</p>
+          <span class="avis-name">مزارع اولاد نائل</span>
+        </div>
+        <div class="avis-card">
+          <div class="stars">★★★★★</div>
+          <p>"جودة وكمية وأسعار ماشاء الله."</p>
+          <span class="avis-name">مهدي شرع الله</span>
+        </div>
+        <div class="avis-card">
+          <div class="stars">★★★★★</div>
+          <p>"Excellent taste, i recommend it to try — you will never regret."</p>
+          <span class="avis-name">K. Kaya</span>
+        </div>
+        <div class="avis-card">
+          <div class="stars">★★★★☆</div>
+          <p>"معاملة و service الله يبارك، ربي يوفقكم."</p>
+          <span class="avis-name">Gaming Arcade</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band" id="locations">
+    <h2>جوعان؟ راكم قريب!</h2>
+    <p>📍 وسط مدينة الجلفة، ساحة بوضياف، عند لاري سوميزو الجديد، مسامي حديقة الكنيسة</p>
+    <div class="cta-actions">
+      <a href="tel:0663011396" class="btn-ghost" style="border-color:var(--cream); color:var(--cream);">📞 اتصل بنا</a>
+      <a href="https://maps.app.goo.gl/4TBpTigqoQxNwEWy8?g_st=ac" target="_blank" class="btn-ghost" style="border-color:var(--cream); color:var(--cream);">🗺️ افتح الخريطة</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h4>القائمة</h4>
+        <a href="#menu">بيتزا</a>
+        <a href="#menu">تاكوس</a>
+        <a href="#menu">تشيز كباب</a>
+        <a href="#menu">سوفلي وغراتا</a>
+      </div>
+      <div class="foot-col">
+        <h4>معلومات</h4>
+        <a href="#why">لماذا نحن</a>
+        <a href="#avis">آراء الزبائن</a>
+        <a href="#locations">الموقع</a>
+      </div>
+      <div class="foot-col">
+        <h4>تواصل معنا</h4>
+        <a href="tel:0663011396">0663011396</a>
+        <a href="https://maps.app.goo.gl/4TBpTigqoQxNwEWy8?g_st=ac" target="_blank">الموقع على الخريطة</a>
+      </div>
+      <div class="foot-col">
+        <h4>تابعونا</h4>
+        <a href="https://www.instagram.com/la_sauce.plus/">Instagram</a>
+        <a href="https://www.facebook.com/lasauce154">Facebook</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 La Sauce+. جميع الحقوق محفوظة.</span>
+      <span>الجلفة، وسط المدينة</span>
+    </div>
+  </footer>
+
+  <script src="cart.js"></script>
+</body>
+</html>

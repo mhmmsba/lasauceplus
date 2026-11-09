@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تم تأكيد الطلبية | La Sauce+</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="cart.css">
+<link rel="icon" type="image/jpeg" href="images/logo.jpg">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="images/logo.jpg" alt="La Sauce+">
+        <span><span class="plus">+</span>LA SAUCE</span>
+      </a>
+      <div class="navlinks">
+        <a href="index.html#menu">العروض</a>
+        <a href="index.html#why">لماذا نحن</a>
+        <a href="index.html#avis">آراء الزبائن</a>
+        <a href="index.html#locations">الموقع</a>
+      </div>
+      <a href="cart.html" class="cart-btn">
+        🛒 السلة
+        <span class="cart-badge" id="navCartBadge" style="display:none;">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <main class="success-page">
+    <div class="success-check">
+      <svg viewBox="0 0 52 52">
+        <circle class="check-circle" cx="26" cy="26" r="24" fill="none"/>
+        <path class="check-mark" fill="none" d="M14 27l7 7 17-17"/>
+      </svg>
+    </div>
+    <h1>تم تأكيد الطلبية بنجاح ✅</h1>
+    <p id="successMsg">سيتم الاتصال بك على الرقم المسجل قريبا.</p>
+    <a href="index.html" class="btn-primary">الرجوع للقائمة الرئيسية</a>
+  </main>
+
+  <script src="cart.js"></script>
+  <script>
+    const savedPhone = sessionStorage.getItem('order_phone');
+    if(savedPhone){
+      document.getElementById('successMsg').textContent = `سيتم الاتصال بك على الرقم المسجل (${savedPhone}) قريبا.`;
+      sessionStorage.removeItem('order_phone');
+    }
+  </script>
+</body>
+</html>

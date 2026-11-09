@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>السلة | La Sauce+</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="cart.css">
+<link rel="icon" type="image/jpeg" href="images/logo.jpg">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <img src="images/logo.jpg" alt="La Sauce+">
+        <span><span class="plus">+</span>LA SAUCE</span>
+      </a>
+      <div class="navlinks">
+        <a href="index.html#menu">العروض</a>
+        <a href="index.html#why">لماذا نحن</a>
+        <a href="index.html#avis">آراء الزبائن</a>
+        <a href="index.html#locations">الموقع</a>
+      </div>
+      <a href="cart.html" class="cart-btn">
+        🛒 السلة
+        <span class="cart-badge" id="navCartBadge" style="display:none;">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <main class="cart-page">
+    <a href="index.html" class="back-link">→ الرجوع للقائمة</a>
+
+    <div id="cartContent">
+      <h1>أكمل طلبيتك</h1>
+      <p class="sub">عبّي معلوماتك، تأكد من طلبيتك، ثم أكّد الطلب.</p>
+
+      <!-- بيانات الزبون -->
+      <section class="cart-section">
+        <h2>معلوماتك</h2>
+
+        <div class="form-row" id="rowName">
+          <label for="fullName">الاسم الكامل</label>
+          <input type="text" id="fullName" placeholder="مثال: أحمد بن علي">
+          <span class="error">من فضلك أدخل اسمك الكامل</span>
+        </div>
+
+        <div class="form-row" id="rowPhone">
+          <label for="phone">رقم الهاتف</label>
+          <input type="tel" id="phone" placeholder="0663011396" maxlength="10">
+          <span class="hint">10 أرقام بدون فراغات</span>
+          <span class="error">رقم الهاتف يجب أن يتكون من 10 أرقام</span>
+        </div>
+
+        <div class="form-row" id="rowOrderType">
+          <label>نوع الطلب</label>
+          <div class="order-type-group">
+            <label class="order-type-option" id="optPickup">
+              <input type="radio" name="orderType" value="pickup"> 🏠 في المحل
+            </label>
+            <label class="order-type-option" id="optDelivery">
+              <input type="radio" name="orderType" value="delivery"> 🛵 توصيل
+            </label>
+          </div>
+          <span class="error">من فضلك اختر نوع الطلب</span>
+        </div>
+      </section>
+
+      <!-- عناصر الطلبية -->
+      <section class="cart-section">
+        <h2>طلبيتك</h2>
+        <div class="order-items" id="orderItems"></div>
+      </section>
+
+      <!-- المشروبات المقترحة -->
+      <section class="cart-section">
+        <h2>🥤 حاب تزيد مشروب؟</h2>
+        <div class="drinks-grid" id="drinksGrid"></div>
+      </section>
+
+      <!-- المجموع و التأكيد -->
+      <section class="cart-section">
+        <div class="total-row">
+          <span>المجموع الإجمالي</span>
+          <strong id="totalPrice">0 دج</strong>
+        </div>
+        <button class="confirm-btn" id="confirmBtn" onclick="submitOrder()">✅ تأكيد الطلبية</button>
+      </section>
+    </div>
+  </main>
+
+  <script src="cart.js"></script>
+  <script>
+    /* -------- عرض قائمة المشروبات -------- */
+    function renderDrinks(){
+      const grid = document.getElementById('drinksGrid');
+      grid.innerHTML = DRINKS_CATALOG.map(d => `
+        <div class="drink-card">
+          <span class="drink-cat">${d.category}</span>
+          <span class="drink-name">${d.name}</span>
+          <span class="drink-price">${d.price} دج</span>
+          <button class="drink-add" onclick="addToCart('${d.id}', '${d.name}', ${d.price})">إضافة +</button>
+        </div>
+      `).join('');
+    }
+
+    /* -------- عرض عناصر السلة -------- */
+    function renderCartPage(){
+      const cart = getCart();
+      const wrap = document.getElementById('orderItems');
+
+      if(cart.length === 0){
+        wrap.innerHTML = `<div class="empty-cart">سلتك فارغة، ارجع للقائمة و اختار طبقك المفضل 🍕</div>`;
+      } else {
+        wrap.innerHTML = cart.map(item => `
+          <div class="order-item">
+            <div>
+              <div class="order-item-name">${item.name}</div>
+              <div class="order-item-price">${item.price} دج / الوحدة</div>
+            </div>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty('${item.id}', -1)">−</button>
+              <span class="qty-value">${item.qty}</span>
+              <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+            </div>
+            <div class="line-total">${item.qty * item.price} دج</div>
+            <button class="remove-btn" onclick="removeFromCart('${item.id}')" title="حذف">✕</button>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('totalPrice').textContent = cartTotal() + ' دج';
+      document.getElementById('confirmBtn').disabled = cart.length === 0;
+    }
+
+    /* -------- تفاعل اختيار نوع الطلب -------- */
+    document.querySelectorAll('input[name="orderType"]').forEach(input => {
+      input.addEventListener('change', () => {
+        document.querySelectorAll('.order-type-option').forEach(el => el.classList.remove('checked'));
+        input.closest('.order-type-option').classList.add('checked');
+        document.getElementById('rowOrderType').classList.remove('invalid');
+      });
+    });
+
+    /* -------- التحقق من صحة المدخلات -------- */
+    function validateForm(){
+      let valid = true;
+      let firstInvalidRow = null;
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const rowName = document.getElementById('rowName');
+      if(fullName.length < 3){
+        rowName.classList.add('invalid'); valid = false;
+        firstInvalidRow = firstInvalidRow || rowName;
+      } else {
+        rowName.classList.remove('invalid');
+      }
+
+      const phone = document.getElementById('phone').value.trim();
+      const rowPhone = document.getElementById('rowPhone');
+      if(!/^[0-9]{10}$/.test(phone)){
+        rowPhone.classList.add('invalid'); valid = false;
+        firstInvalidRow = firstInvalidRow || rowPhone;
+      } else {
+        rowPhone.classList.remove('invalid');
+      }
+
+      const orderType = document.querySelector('input[name="orderType"]:checked');
+      const rowType = document.getElementById('rowOrderType');
+      if(!orderType){
+        rowType.classList.add('invalid'); valid = false;
+        firstInvalidRow = firstInvalidRow || rowType;
+      } else {
+        rowType.classList.remove('invalid');
+      }
+
+      if(getCart().length === 0){
+        showToast('سلتك فارغة، زيد طبق قبل ما تأكد الطلبية');
+        valid = false;
+      }
+
+      if(!valid && firstInvalidRow){
+        showToast('⚠️ من فضلك عبّي كل المعلومات المطلوبة');
+        firstInvalidRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const field = firstInvalidRow.querySelector('input');
+        if(field) field.focus({ preventScroll: true });
+      }
+
+      return valid ? { fullName, phone, orderType: orderType.value } : null;
+    }
+
+    /* -------- إرسال الطلبية -------- */
+    async function submitOrder(){
+      const customer = validateForm();
+      if(!customer) return;
+
+      const btn = document.getElementById('confirmBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ جاري إرسال الطلبية...';
+
+      const cart = getCart();
+      const total = cartTotal();
+
+      try{
+        await sendOrderToTelegram(customer, cart, total);
+        sessionStorage.setItem('order_phone', customer.phone);
+        clearCart();
+        window.location.href = 'success.html';
+      }catch(err){
+        showToast('⚠️ تعذر إرسال الطلبية، حاول من جديد أو اتصل بنا');
+        btn.disabled = false;
+        btn.textContent = '✅ تأكيد الطلبية';
+      }
+    }
+
+    renderDrinks();
+    renderCartPage();
+  </script>
+</body>
+</html>

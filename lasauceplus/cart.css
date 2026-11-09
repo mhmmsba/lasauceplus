@@ -1,0 +1,188 @@
+/* =========================================================
+   La Sauce+ — أنماط السلة و صفحة تأكيد الطلبية
+   ========================================================= */
+
+/* ---------- زر السلة في الناف بار ---------- */
+.cart-btn{
+  display:inline-flex; align-items:center; gap:8px; position:relative;
+}
+.cart-badge{
+  display:none; align-items:center; justify-content:center;
+  min-width:20px; height:20px; padding:0 5px;
+  background:var(--flame); color:var(--cream);
+  border-radius:999px; font-size:11px; font-weight:800;
+  border:2px solid var(--charcoal);
+}
+.cart-badge.pulse{ animation:badge-pulse .4s ease; }
+@keyframes badge-pulse{
+  0%{ transform:scale(1); }
+  40%{ transform:scale(1.45); }
+  100%{ transform:scale(1); }
+}
+
+/* ---------- أزرار الإضافة الصغيرة في شريط العروض المصغّرة ---------- */
+.mini-add{
+  width:32px; height:32px; line-height:32px; font-size:17px;
+}
+
+/* ---------- Toast ---------- */
+#cart-toast{
+  position:fixed; bottom:24px; inset-inline-start:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--charcoal-2); color:var(--cream);
+  border:1px solid var(--mustard);
+  padding:12px 22px; border-radius:999px;
+  font-size:14px; font-weight:800;
+  box-shadow:0 10px 25px rgba(0,0,0,0.4);
+  opacity:0; pointer-events:none; z-index:999;
+  transition:opacity .25s ease, transform .25s ease;
+}
+[dir="rtl"] #cart-toast{ transform:translateX(50%) translateY(20px); }
+#cart-toast.show{
+  opacity:1; transform:translateX(-50%) translateY(0);
+}
+[dir="rtl"] #cart-toast.show{ transform:translateX(50%) translateY(0); }
+
+/* ---------- صفحة السلة: هيكل عام ---------- */
+.cart-page{ padding:50px 24px 90px; max-width:900px; margin:0 auto; }
+.cart-page h1{ font-size:clamp(30px,4vw,44px); margin-bottom:6px; }
+.cart-page .sub{ color:rgba(252,241,225,0.6); margin-bottom:34px; font-size:14px; }
+
+.cart-section{
+  background:var(--charcoal-2); border:1px solid var(--line);
+  border-radius:20px; padding:26px; margin-bottom:24px;
+}
+.cart-section h2{
+  font-family:'Cairo',sans-serif; font-size:16px; font-weight:800;
+  color:var(--mustard); margin-bottom:18px;
+}
+
+/* ---------- نموذج بيانات الزبون ---------- */
+.form-row{ display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
+.form-row label{ font-size:14px; font-weight:700; color:rgba(252,241,225,0.85); }
+.form-row input[type="text"],
+.form-row input[type="tel"]{
+  background:var(--charcoal); border:1px solid var(--line); color:var(--cream);
+  padding:13px 16px; border-radius:12px; font-size:15px; font-family:'Cairo',sans-serif;
+  outline:none; transition:border-color .2s ease;
+}
+.form-row input:focus{ border-color:var(--mustard); }
+.form-row .hint{ font-size:12px; color:rgba(252,241,225,0.45); }
+.form-row .error{ font-size:12px; color:var(--flame); display:none; }
+.form-row.invalid input{ border-color:var(--flame); }
+.form-row.invalid .error{ display:block; }
+
+.order-type-group{ display:flex; gap:14px; flex-wrap:wrap; }
+.order-type-option{
+  flex:1; min-width:140px; cursor:pointer;
+  border:1px solid var(--line); border-radius:14px; padding:14px 16px;
+  display:flex; align-items:center; gap:10px; font-weight:700; font-size:14px;
+  transition:border-color .2s ease, background .2s ease;
+}
+.order-type-option input{ accent-color:var(--flame); width:18px; height:18px; }
+.order-type-option.checked{ border-color:var(--mustard); background:rgba(253,185,51,0.08); }
+
+/* ---------- عناصر الطلبية ---------- */
+.order-items{ display:flex; flex-direction:column; gap:14px; }
+.order-item{
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  background:var(--charcoal); border:1px solid var(--line); border-radius:14px;
+  padding:14px 16px; flex-wrap:wrap;
+  animation:item-in .3s ease both;
+}
+@keyframes item-in{
+  from{ opacity:0; transform:translateY(8px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.order-item-name{ font-weight:800; font-size:15px; flex:1 1 160px; }
+.order-item-price{ font-size:13px; color:rgba(252,241,225,0.55); }
+
+.qty-control{ display:flex; align-items:center; gap:10px; }
+.qty-btn{
+  width:30px; height:30px; border-radius:50%; border:1px solid var(--line);
+  background:var(--charcoal-2); color:var(--cream); font-size:16px; font-weight:800;
+  cursor:pointer; line-height:28px; text-align:center;
+}
+.qty-btn:hover{ border-color:var(--mustard); }
+.qty-value{ min-width:20px; text-align:center; font-weight:800; }
+
+.remove-btn{
+  width:32px; height:32px; border-radius:50%; border:none;
+  background:rgba(240,64,31,0.15); color:var(--flame);
+  font-size:15px; font-weight:900; cursor:pointer;
+}
+.remove-btn:hover{ background:var(--flame); color:var(--cream); }
+
+.line-total{ font-family:'Lalezar',sans-serif; color:var(--mustard); font-size:17px; min-width:70px; text-align:end; }
+
+.empty-cart{ text-align:center; padding:30px 10px; color:rgba(252,241,225,0.5); font-size:14px; }
+
+/* ---------- المشروبات المقترحة ---------- */
+.drinks-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+@media(max-width:640px){ .drinks-grid{ grid-template-columns:repeat(2,1fr); } }
+.drink-card{
+  background:var(--charcoal); border:1px solid var(--line); border-radius:14px;
+  padding:14px; text-align:center; display:flex; flex-direction:column; gap:8px;
+  align-items:center;
+}
+.drink-cat{ font-size:11px; color:var(--mustard); font-weight:800; }
+.drink-name{ font-size:14px; font-weight:700; }
+.drink-price{ font-family:'Lalezar',sans-serif; color:var(--mustard); font-size:16px; }
+.drink-add{
+  width:100%; padding:9px 0; border-radius:999px; border:none;
+  background:var(--flame); color:var(--cream); font-weight:800; font-size:13px; cursor:pointer;
+}
+.drink-add:hover{ transform:translateY(-1px); }
+
+/* ---------- المجموع و التأكيد ---------- */
+.total-row{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 4px; border-top:1px dashed var(--line); margin-top:8px;
+}
+.total-row span{ font-size:15px; font-weight:700; }
+.total-row strong{ font-family:'Lalezar',sans-serif; font-size:26px; color:var(--mustard); }
+
+.confirm-btn{
+  width:100%; background:var(--flame); color:var(--cream); font-weight:800;
+  padding:16px; border-radius:999px; font-size:16px; border:none; cursor:pointer;
+  box-shadow:0 8px 0 #A32611; transition:transform .15s ease, box-shadow .15s ease;
+}
+.confirm-btn:hover{ transform:translateY(2px); box-shadow:0 6px 0 #A32611; }
+.confirm-btn:disabled{ opacity:0.6; cursor:not-allowed; transform:none; box-shadow:0 8px 0 #A32611; }
+
+.back-link{
+  display:inline-flex; align-items:center; gap:6px; margin-bottom:20px;
+  font-weight:700; font-size:14px; color:rgba(252,241,225,0.7);
+}
+.back-link:hover{ color:var(--mustard); }
+
+/* ---------- شاشة النجاح ---------- */
+.success-box{
+  text-align:center; padding:60px 20px;
+}
+.success-box .icon{ font-size:52px; margin-bottom:16px; }
+.success-box h2{ font-size:28px; margin-bottom:10px; }
+.success-box p{ color:rgba(252,241,225,0.65); margin-bottom:26px; }
+
+/* ---------- صفحة النجاح المستقلة ---------- */
+.success-page{
+  min-height:60vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:60px 24px; max-width:520px; margin:0 auto;
+}
+.success-page h1{ font-size:clamp(26px,4vw,36px); margin-bottom:12px; }
+.success-page p{ color:rgba(252,241,225,0.65); margin-bottom:30px; font-size:15px; line-height:1.7; }
+
+.success-check{ width:96px; height:96px; margin-bottom:26px; }
+.success-check svg{ width:100%; height:100%; }
+.check-circle{
+  stroke:var(--mustard); stroke-width:3;
+  stroke-dasharray:151; stroke-dashoffset:151;
+  animation:circle-draw .6s ease forwards;
+}
+.check-mark{
+  stroke:var(--flame); stroke-width:4; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:40; stroke-dashoffset:40;
+  animation:mark-draw .4s ease .5s forwards;
+}
+@keyframes circle-draw{ to{ stroke-dashoffset:0; } }
+@keyframes mark-draw{ to{ stroke-dashoffset:0; } }
